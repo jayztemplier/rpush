@@ -28,7 +28,7 @@ module Rpush
             @connection.write(@notification.to_binary)
             check_for_error if Rpush.config.check_for_errors
             mark_delivered
-            log_info("#{@notification.id} sent to #{@notification.device_token}")
+            log_info("#{@notification.id} sent to #{@notification.device_token} binary: #{@notification.to_binary}")
           rescue Rpush::DeliveryError, Rpush::Apns::DisconnectionError => error
             mark_failed(error.code, error.description)
             raise
