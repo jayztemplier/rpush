@@ -75,9 +75,12 @@ module Rpush
         json
       end
 
-      def to_binary(options = {})
+      def id_for_pack(options = {})
         id_for_pack = options[:for_validation] ? 0 : id
-        [1, id_for_pack, expiry, 0, 32, device_token, payload_size, payload].pack("cNNccH*na*")
+      end
+      
+      def to_binary(options = {})
+        [1, id_for_pack(options), expiry, 0, 32, device_token, payload_size, payload].pack("cNNccH*na*")
       end
     end
   end
